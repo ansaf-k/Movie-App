@@ -13,9 +13,7 @@ const Banner = () => {
         try {
             const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`);
             const jsonData = await response.json();
-            console.log(jsonData);
             setData(jsonData.results.slice(0, 5));
-            console.warn(data);
         } catch (error) {
             console.error(error);
         }
