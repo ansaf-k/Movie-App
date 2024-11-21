@@ -18,8 +18,8 @@ const App = () => {
     <>
       <NavbarHead onSearchChange={handleSearchChange} />
       <Banner />
-      <Card searchQuery={searchQuery} />
       <Routes>
+        <Route path="/" element={<Card searchQuery={searchQuery} />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
     </>

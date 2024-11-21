@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  Navigate, useNavigate } from "react-router-dom";
 
 const Card = ({ searchQuery, categories }) => {
     const navigate = useNavigate();
@@ -61,7 +61,7 @@ const Card = ({ searchQuery, categories }) => {
                         <div
                             key={index}
                             className="relative max-w-xs bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
-                            onClick={() => Navigate(`/movie/${movie.id}`)}
+                            onClick={() => navigate(`/movie/${movie.id}`)}
                         >
                             <div>
                                 <img className="rounded-lg w-full h-auto grayscale-[.25]" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
