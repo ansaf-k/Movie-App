@@ -5,6 +5,7 @@ import Card from "./components/Card.jsx";
 import NavbarHead from "./components/NavbarHead.jsx";
 import { useState } from "react";
 import MovieDetails from "./components/MovieDetails.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const App = () => {
@@ -17,9 +18,13 @@ const App = () => {
   return (
     <>
       <NavbarHead onSearchChange={handleSearchChange} />
-      <Banner />
       <Routes>
-        <Route path="/" element={<Card searchQuery={searchQuery} />} />
+        <Route path="/" element={
+          <>
+            <Banner />
+            <Card searchQuery={searchQuery} />
+          </>
+        } />
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
     </>

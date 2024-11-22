@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ searchQuery, categories }) => {
     const navigate = useNavigate();
@@ -48,8 +48,8 @@ const Card = ({ searchQuery, categories }) => {
                             key={cat.id}
                             onClick={() => handleCategoryChange(cat.id)}
                             className={`px-4 py-2 rounded-lg transition-all duration-300 ${category === cat.id
-                                    ? 'bg-red-600 text-white'
-                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                ? 'bg-red-600 text-white'
+                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                                 }`}
                         >
                             {cat.name}
@@ -64,9 +64,19 @@ const Card = ({ searchQuery, categories }) => {
                             onClick={() => navigate(`/movie/${movie.id}`)}
                         >
                             <div>
-                                <img className="rounded-lg w-full h-auto grayscale-[.25]" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
+                                {movie.poster_path ? (
+                                    <img
+                                        className="rounded-lg w-full h-auto grayscale-[.25]"
+                                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                                        alt={movie.title}
+                                    />
+                                ) : (
+                                    <div className="rounded-lg w-full h-auto bg-gray-300 flex items-center justify-center">
+                                        <p className="text-gray-600">Image Not Available</p>
+                                    </div>
+                                )}
                             </div>
-                            <div className="p-5 absolute bottom-0 bg-gradient-to-t from-gray-900 to-transparent">
+                            <div className="p-4 absolute bottom-0 bg-gradient-to-t from-gray-900 to-transparent">
                                 <div>
                                     <h5 className="mb-1 text-lg font-bold tracking-tight text-white dark:text-white">{movie.title}</h5>
                                 </div>
