@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Star, Clock, Calendar, Globe, DollarSign, Film, Flag, MessageCircle, Building2 } from 'lucide-react'
