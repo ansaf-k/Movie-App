@@ -1,7 +1,8 @@
+import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ searchQuery, categories }) => {
+const Card = ({ searchQuery }) => {
     const navigate = useNavigate();
     const API_KEY = "944cdd190650ca9f1b9edc47da5d7b72";
     const [movieList, setMovieList] = useState([]);
@@ -39,6 +40,8 @@ const Card = ({ searchQuery, categories }) => {
         setCategory(newCategory);
     };
 
+
+
     return (
         <>
             <div className="bg-gray-900">
@@ -48,8 +51,8 @@ const Card = ({ searchQuery, categories }) => {
                             key={cat.id}
                             onClick={() => handleCategoryChange(cat.id)}
                             className={`px-4 py-2 rounded-lg transition-all duration-300 ${category === cat.id
-                                ? 'bg-red-600 text-white'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                    ? 'bg-red-600 text-white'
+                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                                 }`}
                         >
                             {cat.name}
@@ -60,28 +63,29 @@ const Card = ({ searchQuery, categories }) => {
                     {movieList.map((movie, index) => (
                         <div
                             key={index}
-                            className="relative max-w-xs bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
+                            className="relative w-64 bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
                             onClick={() => navigate(`/movie/${movie.id}`)}
                         >
-                            <div>
+                            <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
                                 {movie.poster_path ? (
                                     <img
-                                        className="rounded-lg w-full h-auto grayscale-[.25]"
+                                        className="w-full h-full object-cover grayscale-[.25]"
                                         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                         alt={movie.title}
                                     />
                                 ) : (
-                                    <div className="rounded-lg w-full h-auto bg-gray-300 flex items-center justify-center">
-                                        <p className="text-gray-600">Image Not Available</p>
+                                    <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+                                        <p className="text-gray-600 text-center px-4">Image Not Available</p>
                                     </div>
                                 )}
                             </div>
-                            <div className="p-4 absolute bottom-0 bg-gradient-to-t from-gray-900 to-transparent">
-                                <div>
-                                    <h5 className="mb-1 text-lg font-bold tracking-tight text-white dark:text-white">{movie.title}</h5>
-                                </div>
-                                <p className="mb-2 text-sm font-normal text-white dark:text-gray-400">{movie.overview.slice(0, 100)}...</p>
-                                <button className="inline-flex items-center px-3 py-2 text-s font-medium text-center text-white bg-gray-800 rounded-lg hover:bg-gray-900 bg-opacity-75 duration-200 ease-out">
+                            <div className="p-3 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent">
+                                <h5 className="mb-1 text-lg font-bold tracking-tight text-white">{movie.title}</h5>
+                                <p className="mb-2 text-sm font-normal text-white overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                                    {movie.overview}
+                                </p>
+                                <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-800 rounded-lg hover:bg-gray-900 bg-opacity-75 transition-colors duration-200 ease-out">
+                                    <Info className="w-4 h-4 mr-2" />
                                     View Details
                                 </button>
                             </div>

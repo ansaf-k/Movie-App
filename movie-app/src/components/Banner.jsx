@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import { Play, Info, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+    const navigate = useNavigate();
     const API_KEY = "944cdd190650ca9f1b9edc47da5d7b72"
+    const YOUTUBE_BASE_URL = "https://www.youtube.com/results?search_query="
     const [data, setData] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const getMovies = async () => {
         try {
@@ -20,12 +23,11 @@ const Banner = () => {
         const fetchMovies = async () => {
             await getMovies()
         }
-    
         fetchMovies()
     
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length)
-        }, 3000)
+        }, 4000)
     
         return () => clearInterval(interval)
     }, [data.length])
@@ -37,6 +39,8 @@ const Banner = () => {
     const prevSlide = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length)
     }
+
+
 
     return (
         <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen">
@@ -52,7 +56,7 @@ const Banner = () => {
                         alt={movie.title}
                         className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent">
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-black/60 to-transparent">
                         <div className="absolute bottom-0 left-0 right-0 text-white p-4 sm:p-6 md:p-8 lg:p-10">
                             <div className="max-w-4xl mx-auto text-center">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">{movie.title}</h2>
@@ -60,10 +64,13 @@ const Banner = () => {
                                     {movie.overview.length > 150 ? `${movie.overview.slice(0, 150)}...` : movie.overview}
                                 </p>
                                 <div className="flex justify-center space-x-2 sm:space-x-4 mb-4">
-                                    <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 sm:py-2 sm:px-4 rounded text-xs sm:text-sm md:text-base">
-                                        <Play className="inline-block mr-1 w-3 h-3 sm:w-4 sm:h-4" /> Play
+                                    <button 
+                                        onClick={() => window.open(`${YOUTUBE_BASE_URL}${movie.title}+trailer`, '_blank')}
+                                        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 sm:py-2 sm:px-4 rounded text-xs sm:text-sm md:text-base"
+                                    >
+                                        <Play className="inline-block mr-1 w-3 h-3 sm:w-4 sm:h-4" /> Play Trailer
                                     </button>
-                                    <button className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 sm:py-2 sm:px-4 rounded text-xs sm:text-sm md:text-base">
+                                    <button onClick={() => navigate(`/movie/${movie.id}`)} className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 sm:py-2 sm:px-4 rounded text-xs sm:text-sm md:text-base">
                                         <Info className="inline-block mr-1 w-3 h-3 sm:w-4 sm:h-4" /> More Info
                                     </button>
                                 </div>
@@ -103,4 +110,3 @@ const Banner = () => {
 }
 
 export default Banner
-

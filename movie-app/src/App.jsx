@@ -3,7 +3,7 @@ import "./App.css";
 import Banner from "./components/Banner.jsx";
 import Card from "./components/Card.jsx";
 import NavbarHead from "./components/NavbarHead.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieDetails from "./components/MovieDetails.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 

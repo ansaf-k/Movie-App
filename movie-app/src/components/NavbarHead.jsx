@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./Component.css"
 import { Search, Bell, User } from 'lucide-react';
 
-const NavbarHead = ({ onSearchChange,onCategory }) => {
+const NavbarHead = ({ onSearchChange }) => {
     
   const [searchMovies, setSearchMovies] = useState('');
 
@@ -11,9 +11,6 @@ const NavbarHead = ({ onSearchChange,onCategory }) => {
     setSearchMovies(value);
     onSearchChange(value);
   };
-  const handleCategory = (value) => {
-    onCategory(value);
-  }
 
   return (
     <>
