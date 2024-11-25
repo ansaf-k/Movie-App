@@ -2,7 +2,7 @@ import { Play } from "lucide-react";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Component.css"
+import "./Component.css";
 
 const Card = ({ movieRef, searchQuery }) => {
     const navigate = useNavigate();
@@ -28,47 +28,42 @@ const Card = ({ movieRef, searchQuery }) => {
             const response = await fetch(url);
             const jsonData = await response.json();
             setMovieList(jsonData.results);
-            console.warn(movieList);
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     useEffect(() => {
         getMovies(searchQuery, category);
-    }, [searchQuery, category])
+    }, [searchQuery, category]);
 
     const handleCategoryChange = (newCategory) => {
         setCategory(newCategory);
     };
 
-
-
     return (
         <>
             <div ref={movieRef}>
                 <div className="bg-gray-900">
-                    <div className="bg-gray-900">
-                        <div className="flex overflow-x-auto pt-8 space-x-2 md:space-x-4 scrollbar-hide justify-center">
-                            {categoryOptions.map((cat) => (
-                                <button
-                                    key={cat.id}
-                                    onClick={() => handleCategoryChange(cat.id)}
-                                    className={`flex-shrink-0 px-3 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${category === cat.id
-                                        ? 'bg-red-600 text-white'
-                                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                                        }`}
-                                >
-                                    {cat.name}
-                                </button>
-                            ))}
-                        </div>
+                    <div className="flex overflow-x-auto pt-4 space-x-2 scrollbar-hide justify-center">
+                        {categoryOptions.map((cat) => (
+                            <button
+                                key={cat.id}
+                                onClick={() => handleCategoryChange(cat.id)}
+                                className={`flex-shrink-0 px-3 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${category === cat.id
+                                    ? 'bg-red-600 text-white'
+                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                    }`}
+                            >
+                                {cat.name}
+                            </button>
+                        ))}
                     </div>
                     <div className="flex flex-wrap justify-center my-10 mx-4 md:mx-14">
                         {movieList.map((movie, index) => (
                             <div
                                 key={index}
-                                className="main-trance relative w-64 bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
+                                className="relative w-64 bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
                                 onClick={() => navigate(`/movie/${movie.id}`)}
                             >
                                 <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
@@ -108,12 +103,12 @@ const Card = ({ movieRef, searchQuery }) => {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 Card.propTypes = {
     movieRef: PropTypes.object.isRequired,
-    searchQuery: PropTypes.object.isRequired,
+    searchQuery: PropTypes.string.isRequired,
 }
 
 export default Card;
