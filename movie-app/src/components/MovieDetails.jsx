@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { Star, Clock, Calendar, Globe, DollarSign, Film, Flag, MessageCircle, Building2, Info, User, Users, ChevronRight } from 'lucide-react'
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { Star, Clock, Calendar, Globe, Film, User, Users, Play } from 'lucide-react'
 
 const API_KEY = "944cdd190650ca9f1b9edc47da5d7b72"
 
@@ -11,8 +11,10 @@ export default function MovieDetails() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const fetchMovieDetails = async () => {
       try {
         const response = await fetch(
@@ -39,9 +41,9 @@ export default function MovieDetails() {
         console.error("Error fetching movie details:", error)
       }
     }
-
     fetchMovieDetails()
-  }, [id])
+  }, [id,location]);
+
 
   if (!movie) return <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
     <button type="button" className="bg-transparent ..." disabled>
@@ -115,7 +117,7 @@ export default function MovieDetails() {
                 <p className="text-gray-300 leading-relaxed">{movie.overview}</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              {/* <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold mb-3 flex items-center">
                     <Building2 className="w-5 h-5 mr-2" />
@@ -152,7 +154,7 @@ export default function MovieDetails() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {movie.homepage && (
                 <div className="mt-8">
@@ -193,9 +195,6 @@ export default function MovieDetails() {
                   </div>
                 ))}
               </div>
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-900 bg-opacity-50 p-2 rounded-l-full">
-                <ChevronRight className="w-6 h-6 text-white" />
-              </div>
             </div>
           </div>
 
@@ -223,12 +222,9 @@ export default function MovieDetails() {
                   </div>
                 ))}
               </div>
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-900 bg-opacity-50 p-2 rounded-l-full">
-                <ChevronRight className="w-6 h-6 text-white" />
-              </div>
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -239,7 +235,7 @@ export default function MovieDetails() {
             {similarMovies.map((movie) => (
               <div
                 key={movie.id}
-                className="relative w-64 bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
+                className="main-trance relative w-64 bg-white hover:scale-[1.02] transition-all duration-300 ease-out border-none rounded-lg shadow m-3 cursor-pointer"
                 onClick={() => navigate(`/movie/${movie.id}`)}
               >
                 <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
@@ -255,14 +251,22 @@ export default function MovieDetails() {
                     </div>
                   )}
                 </div>
-                <div className="p-4 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent">
-                  <h3 className="mb-1 text-lg font-bold tracking-tight text-white">{movie.title}</h3>
-                  <p className="mb-2 text-sm font-normal text-white overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
-                    {movie.overview}
-                  </p>
-                  <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200 ease-out">
-                    <Info className="w-4 h-4 mr-2" />
-                    View Details
+                <div className="absolute top-2 right-2 bg-amber-400 text-black text-sm font-bold px-2 py-1 rounded-full shadow trance opacity-0">
+                  {movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}
+                </div>
+                <div className="p-3 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent trance opacity-0 transition-opacity duration-300">
+                  <h5 className="mb-1 text-xl font-bold tracking-tight text-white">
+                    {movie.title}
+                    {movie.release_date && (
+                      <span className="block text-sm font-normal text-gray-300">
+                        ({new Date(movie.release_date).getFullYear()})
+                      </span>
+                    )}
+                  </h5>
+
+                  <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 transition-colors duration-200 ease-out trance opacity-0">
+                    <Play className="w-4 h-4 mr-2" />
+                    Watch Now
                   </button>
                 </div>
               </div>
@@ -273,4 +277,3 @@ export default function MovieDetails() {
     </div>
   )
 }
-

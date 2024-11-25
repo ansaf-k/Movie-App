@@ -6,6 +6,7 @@ import NavbarHead from "./components/NavbarHead.jsx";
 import { useRef, useState } from "react";
 import MovieDetails from "./components/MovieDetails.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from "./components/Footer.jsx";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         } />
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
+      <Footer/>
     </>
   );
 };

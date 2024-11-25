@@ -48,19 +48,21 @@ const Card = ({ movieRef, searchQuery }) => {
         <>
             <div ref={movieRef}>
                 <div className="bg-gray-900">
-                    <div className="sm:px-3 flex overflow-x-auto pt-8 space-x-4 scrollbar-hide justify-center">
-                        {categoryOptions.map((cat) => (
-                            <button
-                                key={cat.id}
-                                onClick={() => handleCategoryChange(cat.id)}
-                                className={`flex-shrink-0 px-4 py-2 rounded-lg transition-all duration-300 ${category === cat.id
-                                    ? 'bg-red-600 text-white'
-                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                                    }`}
-                            >
-                                {cat.name}
-                            </button>
-                        ))}
+                    <div className="bg-gray-900">
+                        <div className="flex overflow-x-auto pt-8 space-x-2 md:space-x-4 scrollbar-hide justify-center">
+                            {categoryOptions.map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => handleCategoryChange(cat.id)}
+                                    className={`flex-shrink-0 px-3 py-2 rounded-lg transition-all duration-300 text-sm md:text-base ${category === cat.id
+                                        ? 'bg-red-600 text-white'
+                                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                        }`}
+                                >
+                                    {cat.name}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                     <div className="flex flex-wrap justify-center my-10 mx-4 md:mx-14">
                         {movieList.map((movie, index) => (

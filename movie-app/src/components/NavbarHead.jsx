@@ -3,8 +3,8 @@ import "./Component.css"
 import { Search, Menu, X } from 'lucide-react';
 import PropTypes from "prop-types";
 
-const NavbarHead = ({ scrollToMovies,onSearchChange }) => {
-    
+const NavbarHead = ({ scrollToMovies, onSearchChange }) => {
+
   const [searchMovies, setSearchMovies] = useState('');
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -14,14 +14,14 @@ const NavbarHead = ({ scrollToMovies,onSearchChange }) => {
     onSearchChange(value);
   };
 
- 
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
     <>
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md font">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md font">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
@@ -32,8 +32,6 @@ const NavbarHead = ({ scrollToMovies,onSearchChange }) => {
                 <div className="ml-10 flex items-baseline space-x-4">
                   <a href="/" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Home</a>
                   <a onClick={scrollToMovies} className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Movies</a>
-                  <a href="#" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Popular</a>
-                  <a href="#" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Latest</a>
                 </div>
               </div>
             </div>
@@ -60,9 +58,7 @@ const NavbarHead = ({ scrollToMovies,onSearchChange }) => {
           <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className="flex flex-col space-y-2 mt-2">
               <a href="/" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Home</a>
-              <a href="#" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Movies</a>
-              <a href="#" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Popular</a>
-              <a href="#" className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Latest</a>
+              <a onClick={scrollToMovies} className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Movies</a>
             </div>
           </div>
         </div>
@@ -72,7 +68,7 @@ const NavbarHead = ({ scrollToMovies,onSearchChange }) => {
 }
 
 NavbarHead.propTypes = {
-  scrollToMovies: PropTypes   .func.isRequired, // Validate that scrollToMovies is a required function
+  scrollToMovies: PropTypes.func.isRequired, // Validate that scrollToMovies is a required function
   onSearchChange: PropTypes.func.isRequired, // Validate that onSearchChange is a required function
 };
 
