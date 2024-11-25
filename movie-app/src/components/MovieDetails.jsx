@@ -178,14 +178,14 @@ export default function MovieDetails() {
             <div className="relative">
               <div className="flex overflow-x-auto space-x-4 pb-4">
                 {cast.map(member => (
-                  <div key={member.id} className="flex-none w-40">
+                  <div key={member.id} className="relative flex-none w-40">
                     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
                       <img
                         className="w-full h-60 object-cover"
                         src={member.profile_path ? `https://image.tmdb.org/t/p/w500${member.profile_path}` : 'https://via.placeholder.com/300x450?text=Image+Not+Available'}
                         alt={member.name}
                       />
-                      <div className="p-4">
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent p-4">
                         <p className="font-semibold text-sm truncate">{member.name}</p>
                         <p className="text-xs text-gray-400 truncate">{member.character}</p>
                       </div>
@@ -208,14 +208,14 @@ export default function MovieDetails() {
             <div className="relative">
               <div className="flex overflow-x-auto space-x-4 pb-4">
                 {crew.map(member => (
-                  <div key={member.id} className="flex-none w-40">
+                  <div key={member.id} className="relative flex-none w-40">
                     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
                       <img
                         className="w-full h-60 object-cover"
                         src={member.profile_path ? `https://image.tmdb.org/t/p/w500${member.profile_path}` : 'https://via.placeholder.com/300x450?text=No+Image'}
                         alt={member.name}
                       />
-                      <div className="p-4">
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent p-4">
                         <p className="font-semibold text-sm truncate">{member.name}</p>
                         <p className="text-xs text-gray-400 truncate">{member.job}</p>
                       </div>
@@ -228,12 +228,13 @@ export default function MovieDetails() {
               </div>
             </div>
           </div>
+          
         </div>
       </div>
 
       <div className="bg-gray-900">
-        <div className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Similar Movies</h2>
+        <div className="container mx-auto px-4 py-9">
+          <h2 className="text-4xl font-bold text-white mb-8 text-center">Similar Movies</h2>
           <div className="flex flex-wrap justify-center">
             {similarMovies.map((movie) => (
               <div

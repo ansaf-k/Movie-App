@@ -22,3 +22,22 @@
     transform: translate(-50%, -50%);
     object-fit: cover;
 }
+
+.trance {
+    transition: opacity 0.3s ease;
+}
+
+.main-trance:hover .trance {
+    opacity: 1 !important;
+}
+
+.main-trance img{
+    transition: all 0.3s ease;
+}
+
+.main-trance:hover img{
+    filter: brightness(45%);
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
